@@ -33,6 +33,14 @@ public class HelloWorldServlet extends HttpServlet {
         request.setAttribute("firstname", firstname);
         request.setAttribute("lastname", lastname);
         
+        // add validation
+        if (firstname == null || firstname.equals("") || lastname == null || lastname.equals(""))
+        {
+            getServletContext().getRequestDispatcher("/WEB-INF/helloWorldForm.jsp")
+                .forward(request, response);
+            return; // stop execution
+        }
+
         getServletContext().getRequestDispatcher("/WEB-INF/sayHello.jsp")
                 .forward(request, response);
     }
